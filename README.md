@@ -1,6 +1,6 @@
-# Reactions server
+# Interactions server
 
-Server to be used in conjunction with the development of AMP Story reaction elements.
+Server to be used in conjunction with the development of AMP Story interactive elements.
 Only use in development, never in production.
 
 > Note: API not final
@@ -20,4 +20,4 @@ node server.js
 
 Open [localhost:3000](http://localhost:3000)
 
-The root will contain a list of all the current reactionIds and votes for each option. Also there is a button to fake votes to start with a random amount of votes on each option of an initialized reactionId. This will reset the *real* votes and add fake clientIds to each option randomly.
+The root will contain a list of all the current interactionIds and votes for each option. Also there is a button to fake votes to start with a random amount of votes on each option of an initialized interactionId. This will reset the *real* votes and add fake clientIds to each option randomly.

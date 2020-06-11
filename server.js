@@ -115,7 +115,7 @@ function makeResponse(pollKey, clientId) {
  * The query parameters contain the data for getting votes.
  * 
  */
-app.get('/interactives/:interactionId', (req, res) => {
+app.get('/interactions/:interactionId', (req, res) => {
     const clientId = req.query['clientId'];
     const backendId = req.params['interactionId'];
     res.json(makeResponse(backendId, clientId));
@@ -125,7 +125,7 @@ app.get('/interactives/:interactionId', (req, res) => {
  * Post a vote on a poll.
  * The body contains the data for casting the vote.
  */
-app.post('/interactives/:interactionId/react', (req, res) => {
+app.post('/interactions/:interactionId/react', (req, res) => {
     console.log(req.params['interactionId'], req.query, req.body);
     if (!req.query || !req.query['clientId'] || !req.body || req.body['optionSelected'] == undefined) {
         return res.sendStatus(400);
