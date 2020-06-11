@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
  * Admin view of all polls and the respective counts.
  */
 app.get('/', (req, res) => {
-    var document = "<div><h1>Polls results <a href='/fake'><button>Fake results</button></a></h1>";
+    var document = "<div><h1 style=\"color: #5be7ff\">Polls results <a href='/fake'><button>Fake results</button></a></h1>";
     for (let [key, results] of allReactions) {
         var currElement = "<div><h3>" + key + "</h3><ul>";
         results.forEach((e, i) => {
@@ -48,7 +48,8 @@ app.get('/', (req, res) => {
         document += currElement;
     }
     document += "</div>";
-    res.send(document);
+    var html = "<html><head><title>Reactions Backend</title><link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap\" rel=\"stylesheet\"></head><body style=\"background-color: #242327;color:#fff;font-family:'Poppins'\">" + document + "</body><html>";
+    res.send(html);
 });
 
 /**
