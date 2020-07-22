@@ -101,9 +101,9 @@ function makeResponse(pollKey, clientId) {
     ensurePollExists(pollKey);
     var options = allInteractives.get(pollKey).map((votes, interactiveValue) => {
         return {
-            'optionIndex': interactiveValue,
-            'totalCount': votes.size,
-            'selectedByUser': votes.has(clientId)
+            'index': interactiveValue,
+            'count': votes.size,
+            'selected': votes.has(clientId)
         };
     })
     return {'options': options};
@@ -116,7 +116,7 @@ function makeResponse(pollKey, clientId) {
  * 
  */
 app.get('/interactives/:interactiveId', (req, res) => {
-    const clientId = req.query['clientId'];
+    const clientId = req.query['client'];
     const backendId = req.params['interactiveId'];
     res.json(makeResponse(backendId, clientId));
 })
@@ -125,13 +125,13 @@ app.get('/interactives/:interactiveId', (req, res) => {
  * Post a vote on a poll.
  * The body contains the data for casting the vote.
  */
-app.post('/interactives/:interactiveId/react', (req, res) => {
+app.post('/interactives/:interactiveId/:vote', (req, res) => {
     console.log(req.params['interactiveId'], req.query, req.body);
-    if (!req.query || !req.query['clientId'] || !req.body || req.body['optionSelected'] == undefined) {
+    if (!req.query || !req.query['client'] || !req.body || req.body['option_selected'] == undefined) {
         return res.sendStatus(400);
     }
-    const clientId = req.query['clientId'];
-    const vote = req.body['optionSelected'];
+    const clientId = req.query['client'];
+    const vote = req.body['option_selected'];
     const backendId = req.params['interactiveId'];
     castVote(backendId, clientId, vote);
     res.json(makeResponse(backendId, clientId));
